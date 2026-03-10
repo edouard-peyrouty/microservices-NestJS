@@ -12,29 +12,29 @@ import {
 import { UsersService } from '../application/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from '../domain/user.entity';
+import { UserResponseDto } from './dto/user-response.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  findAll(): User[] {
+  findAll(): UserResponseDto[] {
     return this.usersService.findAll();
   }
 
   @Get(':id')
-  findById(@Param('id') id: string): User {
+  findById(@Param('id') id: string): UserResponseDto {
     return this.usersService.findById(id);
   }
 
   @Post()
-  create(@Body() dto: CreateUserDto): User {
+  create(@Body() dto: CreateUserDto): UserResponseDto {
     return this.usersService.create(dto);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() dto: UpdateUserDto): User {
+  update(@Param('id') id: string, @Body() dto: UpdateUserDto): UserResponseDto {
     return this.usersService.update(id, dto);
   }
 
