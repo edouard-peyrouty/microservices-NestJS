@@ -64,4 +64,41 @@ export class GatewayController {
       res.status(502).json({ message: 'Service indisponible' });
     }
   }
+
+  @All('auth')
+  async proxyAuthRoot(@Req() req: Request, @Res() res: Response) {
+    try {
+      const response = await axios({
+        method: req.method,
+        url: `http://localhost:3000${req.url}`,
+        data: req.body,
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': req.headers.authorization,
+        },
+      });
+      res.status(response.status).json(response.data);
+    } catch (error) {
+      res.status(502).json({ message: 'Service indisponible' });
+    }
+  }
+
+  @All('auth/*path')
+  async proxyAuth(@Req() req: Request, @Res() res: Response) {
+    try {
+      const response = await axios({
+        method: req.method,
+        url: `http://localhost:3000${req.url}`,
+        data: req.body,
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': req.headers.authorization,
+        },
+      });
+      res.status(response.status).json(response.data);
+    } catch (error) {
+      res.status(502).json({ message: 'Service indisponible' });
+    }
+  }
+
 }
