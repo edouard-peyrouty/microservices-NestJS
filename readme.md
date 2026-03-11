@@ -57,3 +57,16 @@ Les services seront disponibles sur :
 ---
 
 ## Installation et lancement avec Docker
+
+### Prérequis
+Installer Docker Desktop : https://www.docker.com/products/docker-desktop
+
+### Lancer tous les services
+```bash
+docker-compose up --build
+```
+
+Les services seront disponibles sur :
+- API Gateway : http://localhost:3002
+- Users service : http://localhost:3000
+- Orders service : http://localhost:3001
