@@ -3,7 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UsersController } from '../adapter.in/users.controller';
 import { UsersService } from '../application/users.service';
 import { UsersRepository } from '../infrastructure/users.repository';
-import { AuthController } from 'src/adapter.in/auth.controller';
+import { AuthController } from '../adapter.in/auth.controller';
 
 @Module({
   imports: [
