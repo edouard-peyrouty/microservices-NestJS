@@ -2,11 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { json, urlencoded } from 'express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import axios from 'axios';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(json());
   app.use(urlencoded({ extended: true }));
+
+  const USERS_URL = process.env.USERS_SERVICE_URL || 'http://localhost:3000';
+  const ORDERS_URL = process.env.ORDERS_SERVICE_URL || 'http://localhost:3001';
 
   const config = new DocumentBuilder()
     .setTitle('API Gateway')
@@ -21,8 +25,8 @@ async function bootstrap() {
   const axios = require('axios');
   try {
     const [usersDocs, ordersDocs] = await Promise.all([
-      axios.get('http://localhost:3000/api-docs-json'),
-      axios.get('http://localhost:3001/api-docs-json'),
+      axios.get(`${USERS_URL}/api-docs-json`),
+      axios.get(`${ORDERS_URL}/api-docs-json`),
     ]);
 
     // Fusionne les paths et schemas des deux services
@@ -44,6 +48,6 @@ async function bootstrap() {
 
   SwaggerModule.setup('api-docs', app, document);
 
-  await app.listen(3002);
+  await app.listen(process.env.PORT || 3002);
 }
 bootstrap();
