@@ -17,6 +17,11 @@ async function bootstrap() {
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerOptions);
   SwaggerModule.setup('api-docs', app, swaggerDocument);
 
+  // Expose le JSON brut pour la gateway
+  SwaggerModule.setup('api-docs', app, swaggerDocument, {
+    jsonDocumentUrl: 'api-docs-json',
+  });
+
   await app.listen(process.env.PORT ?? 3001); // port 3001 pour ne pas confliter avec users-service
 }
 bootstrap();

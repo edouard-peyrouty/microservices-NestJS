@@ -18,6 +18,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
 
+  // Expose le JSON brut pour la gateway
+  SwaggerModule.setup('api-docs', app, document, {
+    jsonDocumentUrl: 'api-docs-json',
+  });
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
