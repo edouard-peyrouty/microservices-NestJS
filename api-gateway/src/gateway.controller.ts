@@ -2,6 +2,9 @@ import { All, Controller, Req, Res } from '@nestjs/common';
 import type { Request, Response } from 'express';
 import axios from 'axios';
 
+const USERS_URL = process.env.USERS_SERVICE_URL || 'http://localhost:3000';
+const ORDERS_URL = process.env.ORDERS_SERVICE_URL || 'http://localhost:3001';
+
 @Controller()
 export class GatewayController {
 
@@ -30,32 +33,32 @@ export class GatewayController {
 
   @All('users')
   async proxyUsersRoot(@Req() req: Request, @Res() res: Response) {
-    await this.proxy(`http://localhost:3000${req.url}`, req, res);
+    await this.proxy(`${USERS_URL}${req.url}`, req, res);
   }
 
   @All('users/*path')
   async proxyUsers(@Req() req: Request, @Res() res: Response) {
-    await this.proxy(`http://localhost:3000${req.url}`, req, res);
+    await this.proxy(`${USERS_URL}${req.url}`, req, res);
   }
 
   @All('orders')
   async proxyOrdersRoot(@Req() req: Request, @Res() res: Response) {
-    await this.proxy(`http://localhost:3001${req.url}`, req, res);
+    await this.proxy(`${ORDERS_URL}${req.url}`, req, res);
   }
 
   @All('orders/*path')
   async proxyOrders(@Req() req: Request, @Res() res: Response) {
-    await this.proxy(`http://localhost:3001${req.url}`, req, res);
+    await this.proxy(`${ORDERS_URL}${req.url}`, req, res);
   }
 
   @All('auth')
   async proxyAuthRoot(@Req() req: Request, @Res() res: Response) {
-    await this.proxy(`http://localhost:3000${req.url}`, req, res);
+    await this.proxy(`${USERS_URL}${req.url}`, req, res);
   }
 
   @All('auth/*path')
   async proxyAuth(@Req() req: Request, @Res() res: Response) {
-    await this.proxy(`http://localhost:3000${req.url}`, req, res);
+    await this.proxy(`${USERS_URL}${req.url}`, req, res);
   }
 
 }
