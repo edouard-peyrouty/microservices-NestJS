@@ -1,10 +1,12 @@
 import { All, Controller, Req, Res } from '@nestjs/common';
 import type { Request, Response } from 'express';
 import axios from 'axios';
+import { ApiExcludeController } from '@nestjs/swagger';
 
 const USERS_URL = process.env.USERS_SERVICE_URL || 'http://localhost:3000';
 const ORDERS_URL = process.env.ORDERS_SERVICE_URL || 'http://localhost:3001';
 
+@ApiExcludeController()
 @Controller()
 export class GatewayController {
 

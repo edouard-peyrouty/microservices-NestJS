@@ -14,7 +14,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('API Gateway')
-    .setDescription('Documentation complète — users-service + orders-service')
+    .setDescription('Documentation complète - users-service + orders-service')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
