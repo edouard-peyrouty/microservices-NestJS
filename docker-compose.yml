@@ -15,6 +15,9 @@ services:
     build: ./api-gateway
     ports:
       - "3002:3002"
+    environment:
+      - USERS_SERVICE_URL=http://users-service:3000
+      - ORDERS_SERVICE_URL=http://orders-service:3001
     depends_on:
       - users-service
       - orders-service
